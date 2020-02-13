@@ -1,33 +1,34 @@
-var element = document.getElementById('boxItem');
-var box = element.getContext('2d')
+let detailY;
+function setup () {
+    createCanvas(400, 400, WEBGL)
+    detailY = createSlider(3, 16, 3);
+    detailY.position(10, height + 5);
+    detailY.style('width', '80px');
+    moveItem()
+}
 
-makeItem()
-function makeItem () {
-    box.beginPath()
-    box.rect(40, 40, 22, 22)
-    box.stroke()
-    box.fill()
+var boxElement
+
+function draw () {
+    background('red');
+    boxElement = rect(20,20,20,20) 
+    translate(newvalUD, newvalLR)
+    rotateY(millis() / 1000);
+    sphere(40, 16, detailY.value());
 }
 
 var pos
 var newvalLR=newvalUD=0
-moveItem()
 function moveItem() {
     document.addEventListener('keydown', function(event) {
         if(event.keyCode === 37){ //arrowLeft
-            newvalUD = newvalUD-10
-            element.style.transform = 'translate('+newvalUD+'px,'+newvalLR+'px)'
+            newvalUD -= 10
         } else if(event.keyCode === 38){ //arrowUp
-            newvalLR = newvalLR-10
-            element.style.transform = 'translate('+newvalUD+'px,'+newvalLR+'px)'
+            newvalLR -= 10
         } else if (event.keyCode === 39){ //arrowRight
-            newvalUD = newvalUD+10
-            element.style.transform = 'translate('+newvalUD+'px,'+newvalLR+'px)'
-            constrain(10,10)
+            newvalUD += 10
         } else if(event.keyCode === 40){ //arrowDown
-            newvalLR = newvalLR+10
-            element.style.transform = 'translate('+newvalUD+'px,'+newvalLR+'px)'
-            constrain(element,40,40)
+            newvalLR += 10
         }
     })
  }
